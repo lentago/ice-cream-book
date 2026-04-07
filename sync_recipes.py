@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Convert ice_cream_book recipe markdown files into Astro-compatible
+Convert ice-cream-book recipe markdown files into Astro-compatible
 content files with YAML frontmatter.
 
 Recipe source is determined by:
   1. RECIPE_SOURCE environment variable (used in CI/CD)
-  2. Fallback: ../ice_cream_book/recipes/ (local dev)
+  2. Fallback: ../ice-cream-book/recipes/ (local dev)
 
 Writes to: src/content/recipes/*.md
 """
@@ -20,7 +20,7 @@ RECIPE_SOURCE = os.environ.get("RECIPE_SOURCE")
 if RECIPE_SOURCE:
     REPO_RECIPES = Path(RECIPE_SOURCE)
 else:
-    REPO_RECIPES = Path(__file__).parent.parent / "ice_cream_book" / "recipes"
+    REPO_RECIPES = Path(__file__).parent.parent / "ice-cream-book" / "recipes"
 
 OUTPUT_DIR = Path(__file__).parent / "src" / "content" / "recipes"
 
@@ -134,7 +134,7 @@ recipeNumber: {metadata['recipe_number']}
 def main():
     if not REPO_RECIPES.exists():
         print(f"Error: Recipe directory not found at {REPO_RECIPES}")
-        print(f"  Set RECIPE_SOURCE env var or ensure ../ice_cream_book/recipes/ exists")
+        print(f"  Set RECIPE_SOURCE env var or ensure ../ice-cream-book/recipes/ exists")
         sys.exit(1)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
