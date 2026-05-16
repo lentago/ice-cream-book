@@ -47,7 +47,7 @@ BANNED_PHRASES = [
 ]
 
 CHURN_TIME_RE = re.compile(
-    r"churn[^\n.!?]{0,80}?\d{1,3}\s*(?:-|–|to)\s*\d{1,3}\s*minutes",
+    r"churn[^\n.!?]{0,40}?\d{1,3}\s*(?:-|–|to)\s*\d{1,3}\s*minutes",
     re.IGNORECASE,
 )
 

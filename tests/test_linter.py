@@ -56,6 +56,21 @@ class TestBannedPhrases(unittest.TestCase):
     def test_total_time_range_passes(self):
         self.assertEqual(L.check_banned_phrases("Total Time: 4-6 hours"), [])
 
+    def test_no_churn_alternative_stirring_schedule_passes(self):
+        # Recipe 02 case: "skip churning... stirring every 30-45 minutes"
+        # describes the no-churn stirring schedule, not a churn time.
+        text = (
+            "Alternatively, you can skip churning entirely and just freeze the "
+            "mixture in a container, stirring every 30-45 minutes for the first "
+            "3 hours to break up ice crystals."
+        )
+        self.assertEqual(L.check_banned_phrases(text), [])
+
+    def test_churn_with_intermediate_phrase_still_flagged(self):
+        # Realistic violations with a short clause between still match.
+        text = "Churn until ready, about 20-25 minutes."
+        self.assertTrue(L.check_banned_phrases(text))
+
 
 class TestTagline(unittest.TestCase):
     def test_italic_tagline_passes(self):
