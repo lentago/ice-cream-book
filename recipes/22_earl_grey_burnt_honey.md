@@ -8,7 +8,7 @@
 
 Tea and honey are a lovely, safe pairing. Very civilized. Very predictable. Very... boring.
 
-This version takes that nice simple idea and makes it absolutely unhinged. In a good way.
+This version takes that nice simple idea and makes it absolutely fucking unhinged. In a good way.
 
 The honey here gets cooked until it's almost burnt—dark, bitter-edged, and WAY more complex than honey has any right to be. Combined with Earl Grey that's been steeped strong and crunchy honeycomb that foams up dramatically when you make it (seriously, you'll want to take a video for the 'gram), you get something that feels both elegant and a little chaotic. Like afternoon tea hosted by someone who doesn't care about the rules.
 
@@ -62,7 +62,7 @@ If you mess this up—and there's a decent chance you might the first time—it'
 
 *For the base:* Heat 3 tbsp honey in a light-colored pan over medium heat. Just... watch it. Stare at it. Make it uncomfortable. After 5-7 minutes, it'll shift from golden to deep amber—about the color of good bourbon. That's when you pull it. Immediately whisk in 1 tbsp cream. It'll steam and bubble a bit, maybe hiss at you like it's offended. That's normal. Cool it completely.
 
-*For the swirl:* Same process with 1/4 cup honey, but this time take it DARKER—mahogany brown, right to the edge where you're thinking "is this too dark? Am I about to fuck this up?" Probably not, actually. It should look almost scary. Like it might have feelings. Add 1 tbsp cream and a pinch of salt. Cool, then refrigerate.
+*For the swirl:* Same process with 1/4 cup honey, but this time take it DARKER—mahogany brown, right to the edge where you're thinking "is this too dark? Am I about to ruin this?" Probably not, actually. It should look almost scary. Like it might have feelings. Add 1 tbsp cream and a pinch of salt. Cool, then refrigerate.
 
 **IMPORTANT AS HELL:** Use a light-colored pan for this. Dark pans make it nearly impossible to see what color the honey actually is, which means you're basically guessing and hoping for the best. Light pan means you can actually SEE when it's ready. Don't skimp on this detail.
 
@@ -84,7 +84,7 @@ Refrigerate at least 4 hours, preferably overnight.
 
 **Churn:**
 
-Churn until you hit soft-serve consistency—should hold its shape on a spoon and look thick and creamy. Then layer this shit up: spread a third of the ice cream in your container, drizzle some of that dark honey swirl, scatter honeycomb pieces. Repeat twice more. Give it a gentle swirl with a knife—you want ribbons, not full integration. We're going for marble, not muddy brown.
+Churn until you hit soft-serve consistency—should hold its shape on a spoon and look thick and creamy. Then build the layers: spread a third of the ice cream in your container, drizzle some of that dark honey swirl, scatter honeycomb pieces. Repeat twice more. Give it a gentle swirl with a knife—you want ribbons, not full integration. We're going for marble, not muddy brown.
 
 Freeze 4+ hours until firm.
 

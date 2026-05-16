@@ -17,7 +17,7 @@ CANONICAL_DIR = ROOT / "canonical_samples"
 FLAVORS_FILE = FRONT_DIR / "08_the_flavors.md"
 
 PROFANITY = ["fuck", "shit", "damn", "hell", "ass"]
-ADDRESS_TERMS = ["homie", "chief", "buddy", "pal", "boss", "dawg", "friendo"]
+ADDRESS_TERMS = ["homie", "dude", "chief", "buddy", "pal", "boss", "dawg", "friend", "friendo"]
 FORBIDDEN_CHARS = ["✓", "→", "★", "🔥", "🍨"]
 ENCODING_BROKEN = ["â€", "Ã", "�"]
 
@@ -89,9 +89,12 @@ def build_canonical_profile():
 CANONICAL_PROFILE = build_canonical_profile()
 
 
+_WORD_SUFFIX = r"(?:ing|ed|er|s|y|in)?"
+
+
 def count_occurrences(text, words):
-    text = text.lower()
-    return sum(text.count(w) for w in words)
+    pattern = r"\b(?:" + "|".join(re.escape(w) for w in words) + r")" + _WORD_SUFFIX + r"\b"
+    return len(re.findall(pattern, text, re.IGNORECASE))
 
 
 def split_paragraphs(text):
@@ -266,7 +269,7 @@ def check_all(text):
             break
 
     if "## Instructions" in text:
-        instr = text.split("## Instructions", 1)[1]
+        instr = text.split("## Instructions", 1)[1].split("## Notes", 1)[0]
         if count_occurrences(instr, PROFANITY) > 2:
             warnings.append(suggest("Too much profanity in instructions", "Keep neutral tone"))
 

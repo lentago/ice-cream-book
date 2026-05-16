@@ -176,6 +176,33 @@ class TestCrossReferences(unittest.TestCase):
         self.assertEqual(L.check_cross_references(titles, flavors), [])
 
 
+class TestCountOccurrences(unittest.TestCase):
+    """Substring counting used to false-match common English words.
+    These tests pin down that 'pal' no longer matches 'palm', etc.
+    """
+
+    def test_bare_words_count(self):
+        self.assertEqual(L.count_occurrences("fuck shit damn hell ass", L.PROFANITY), 5)
+
+    def test_common_inflections_count(self):
+        # -ing, -ed, -s suffixes count. -ty / unusual suffixes intentionally don't
+        # (under-counting is safer than re-introducing palm/pale false positives).
+        self.assertEqual(L.count_occurrences("fucking fucked damned shits", L.PROFANITY), 4)
+
+    def test_palm_does_not_match_pal(self):
+        # Recipe content like "palm sugar" or "pale green" shouldn't inflate counts.
+        self.assertEqual(L.count_occurrences("palm sugar, pale green palate", L.ADDRESS_TERMS), 0)
+
+    def test_passport_does_not_match_ass(self):
+        self.assertEqual(L.count_occurrences("passport passion class compass", L.PROFANITY), 0)
+
+    def test_hello_does_not_match_hell(self):
+        self.assertEqual(L.count_occurrences("hello, shellfish", L.PROFANITY), 0)
+
+    def test_address_bare_words_count(self):
+        self.assertEqual(L.count_occurrences("homie chief buddy pal", L.ADDRESS_TERMS), 4)
+
+
 class TestHelpers(unittest.TestCase):
     def test_extract_h1(self):
         self.assertEqual(L.extract_h1("# Hello\n\nbody"), "Hello")

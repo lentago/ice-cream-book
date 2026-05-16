@@ -1568,7 +1568,7 @@ Have your warmed cream, butter, and gochugaru measured and sitting right there n
 
 Combine sugar and water in a light-colored saucepan. This is important, friend—a light pan lets you actually see the color develop as the sugar caramelizes. With a dark pan you're basically guessing, which is a great way to burn your caramel and waste a bunch of ingredients.
 
-Heat over medium-high WITHOUT STIRRING until it reaches deep amber—think copper penny color. This takes about 7-10 minutes, and you'll spend most of that time just staring at it waiting for something to happen. That's normal. Don't walk away to check your phone. The moment it starts to change color, it accelerates like hell.
+Heat over medium-high WITHOUT STIRRING until it reaches deep amber—think copper penny color. This takes about 7-10 minutes, and you'll spend most of that time just staring at it waiting for something to happen. That's normal. Don't walk away to check your phone. The moment it starts to change color, it accelerates rapidly—stay close.
 
 Pull it off the heat and carefully pour in the warmed cream. It'll bubble violently and make noises like it's auditioning for a volcano documentary. This is totally normal—the temperature difference causes instant steam. Just whisk until smooth. Don't be a hero and try to taste it—it's roughly the temperature of lava right now.
 
@@ -2965,7 +2965,7 @@ The chile brings fruity, earthy heat that builds slowly. The chocolate is dark a
 
 **Candied Orange Peel with Chile (make this first—it takes 2+ hours):**
 
-Strip that peel, homie. Cut off the top and bottom of each orange so they sit flat. Score the peel vertically in quarters, then peel off those quarters. Try to get as little white pith as possible—too much pith makes them bitter as hell. Slice the peel into thin strips, about 1/4 inch wide.
+Strip that peel, homie. Cut off the top and bottom of each orange so they sit flat. Score the peel vertically in quarters, then peel off those quarters. Try to get as little white pith as possible—too much pith makes them aggressively bitter. Slice the peel into thin strips, about 1/4 inch wide.
 
 Blanch the bitterness out. Put the orange peel strips in a medium saucepan and cover with cold water. Bring to a boil, then drain. Repeat this TWO MORE TIMES with fresh water each time. Yeah, three times. This pulls out the bitter compounds in the pith. Your kitchen will smell incredible, like orange essential oil exploded.
 
@@ -3009,7 +3009,7 @@ Cook to nappe. Return the saucepan to medium-low heat and cook, stirring constan
 
 Add vanilla and strain. Remove from heat, stir in the vanilla extract, then strain through a fine-mesh strainer into a clean bowl. This catches any bits of cooked egg or undissolved cocoa. Press on the solids to get all that good chocolate custard through.
 
-Chill the hell out of it. Cover with plastic wrap pressed directly onto the surface to prevent a skin from forming. Refrigerate until completely cold—at least 4 hours, but overnight is better. The custard will thicken more as it chills, and the flavors will meld. The chile heat will also become more pronounced as it sits.
+Chill it thoroughly. Cover with plastic wrap pressed directly onto the surface to prevent a skin from forming. Refrigerate until completely cold—at least 4 hours, but overnight is better. The custard will thicken more as it chills, and the flavors will meld. The chile heat will also become more pronounced as it sits.
 
 **Churn and Assemble:**
 
@@ -3418,7 +3418,7 @@ Rich coffee-honey base—aromatic, floral, slightly wine-like if you used good E
 
 Tea and honey are a lovely, safe pairing. Very civilized. Very predictable. Very... boring.
 
-This version takes that nice simple idea and makes it absolutely unhinged. In a good way.
+This version takes that nice simple idea and makes it absolutely fucking unhinged. In a good way.
 
 The honey here gets cooked until it's almost burnt—dark, bitter-edged, and WAY more complex than honey has any right to be. Combined with Earl Grey that's been steeped strong and crunchy honeycomb that foams up dramatically when you make it (seriously, you'll want to take a video for the 'gram), you get something that feels both elegant and a little chaotic. Like afternoon tea hosted by someone who doesn't care about the rules.
 
@@ -3472,7 +3472,7 @@ If you mess this up—and there's a decent chance you might the first time—it'
 
 *For the base:* Heat 3 tbsp honey in a light-colored pan over medium heat. Just... watch it. Stare at it. Make it uncomfortable. After 5-7 minutes, it'll shift from golden to deep amber—about the color of good bourbon. That's when you pull it. Immediately whisk in 1 tbsp cream. It'll steam and bubble a bit, maybe hiss at you like it's offended. That's normal. Cool it completely.
 
-*For the swirl:* Same process with 1/4 cup honey, but this time take it DARKER—mahogany brown, right to the edge where you're thinking "is this too dark? Am I about to fuck this up?" Probably not, actually. It should look almost scary. Like it might have feelings. Add 1 tbsp cream and a pinch of salt. Cool, then refrigerate.
+*For the swirl:* Same process with 1/4 cup honey, but this time take it DARKER—mahogany brown, right to the edge where you're thinking "is this too dark? Am I about to ruin this?" Probably not, actually. It should look almost scary. Like it might have feelings. Add 1 tbsp cream and a pinch of salt. Cool, then refrigerate.
 
 **IMPORTANT AS HELL:** Use a light-colored pan for this. Dark pans make it nearly impossible to see what color the honey actually is, which means you're basically guessing and hoping for the best. Light pan means you can actually SEE when it's ready. Don't skimp on this detail.
 
@@ -3494,7 +3494,7 @@ Refrigerate at least 4 hours, preferably overnight.
 
 **Churn:**
 
-Churn until you hit soft-serve consistency—should hold its shape on a spoon and look thick and creamy. Then layer this shit up: spread a third of the ice cream in your container, drizzle some of that dark honey swirl, scatter honeycomb pieces. Repeat twice more. Give it a gentle swirl with a knife—you want ribbons, not full integration. We're going for marble, not muddy brown.
+Churn until you hit soft-serve consistency—should hold its shape on a spoon and look thick and creamy. Then build the layers: spread a third of the ice cream in your container, drizzle some of that dark honey swirl, scatter honeycomb pieces. Repeat twice more. Give it a gentle swirl with a knife—you want ribbons, not full integration. We're going for marble, not muddy brown.
 
 Freeze 4+ hours until firm.
 

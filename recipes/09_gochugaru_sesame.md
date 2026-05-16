@@ -50,7 +50,7 @@ Have your warmed cream, butter, and gochugaru measured and sitting right there n
 
 Combine sugar and water in a light-colored saucepan. This is important, friend—a light pan lets you actually see the color develop as the sugar caramelizes. With a dark pan you're basically guessing, which is a great way to burn your caramel and waste a bunch of ingredients.
 
-Heat over medium-high WITHOUT STIRRING until it reaches deep amber—think copper penny color. This takes about 7-10 minutes, and you'll spend most of that time just staring at it waiting for something to happen. That's normal. Don't walk away to check your phone. The moment it starts to change color, it accelerates like hell.
+Heat over medium-high WITHOUT STIRRING until it reaches deep amber—think copper penny color. This takes about 7-10 minutes, and you'll spend most of that time just staring at it waiting for something to happen. That's normal. Don't walk away to check your phone. The moment it starts to change color, it accelerates rapidly—stay close.
 
 Pull it off the heat and carefully pour in the warmed cream. It'll bubble violently and make noises like it's auditioning for a volcano documentary. This is totally normal—the temperature difference causes instant steam. Just whisk until smooth. Don't be a hero and try to taste it—it's roughly the temperature of lava right now.
 
