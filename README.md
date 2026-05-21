@@ -1,18 +1,18 @@
-# ice-cream-book
+# ice-cream-book — "Ice Cream to Fight With"
 
-A 27-recipe custard-based ice cream cookbook spanning international cuisines, built as a modular Markdown project and served as content for [icecreamtofightwith.com](https://icecreamtofightwith.com). The book combines sophisticated technique instruction with a distinctive conversational voice — recipes you'll actually want to read, not just follow.
+A 28-recipe custard-based ice cream cookbook spanning international cuisines, built as a modular Markdown project and served as content for [icecreamtofightwith.com](https://icecreamtofightwith.com). The book combines sophisticated technique instruction with a distinctive conversational voice — recipes you'll actually want to read, not just follow.
 
 **Authorship:** The recipes, front matter, and build scripts in this repo are co-written with [Claude](https://claude.ai) (Anthropic). I bring the flavor ideas, technique experience, and editorial direction; Claude writes the prose and the code. I'm an infrastructure operator, not a software engineer or a professional writer — please don't read this repo as a portfolio of either coding or authorship.
 
 ## Why This Exists
 
-What started as a personal recipe collection became a full cookbook project: 27 recipes developed through iterative design, flavor pairing research, and obsessive attention to technique. Every recipe has been tested, revised, and documented with the kind of detail that actually helps someone make ice cream — not the sanitized, hedge-everything approach of most cookbooks.
+What started as a personal recipe collection became a full cookbook project: 28 recipes developed through iterative design, flavor pairing research, and obsessive attention to technique. Every recipe has been tested, revised, and documented with the kind of detail that actually helps someone make ice cream — not the sanitized, hedge-everything approach of most cookbooks.
 
 The project is also a deliberate exercise in modular content architecture. The book lives as individual Markdown files, compiled on demand, version-controlled with git, and deployed as a static site through the companion infrastructure repository. No CMS, no database, no proprietary formats — just text files and a build script.
 
 ## What's in the Book
 
-Twenty-seven recipes organized by difficulty, from approachable to genuinely demanding:
+Twenty-eight recipes organized by difficulty, from approachable to genuinely demanding:
 
 **Front Matter:** Introduction, philosophy, a custard fundamentals tutorial, difficulty ratings, and a flavor overview. Nine sections covering everything a reader needs before touching a recipe.
 
@@ -36,11 +36,11 @@ ice-cream-book/
 │   ├── 07_the_flavors.md
 │   ├── 08_custard_fundamentals.md
 │   └── 09_final_thoughts.md
-├── recipes/                       # Individual recipes (27 files)
-│   ├── 01_cardamom_pistachio_kulfi.md
+├── recipes/                       # Individual recipes (28 files)
+│   ├── 01_coconut_pandan.md
 │   ├── 02_sinh_to_bo.md
 │   ├── ...
-│   └── 27_new_orleans_chicory_beignet.md
+│   └── 28_appalachian_pawpaw_maple.md
 ├── back_matter/
 │   └── 99_closing.md             # Closing remarks
 ├── compile_book.py                # Python compilation script

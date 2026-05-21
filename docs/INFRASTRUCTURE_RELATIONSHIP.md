@@ -1,6 +1,6 @@
 # How This Book Becomes a Website
 
-This document describes how `ice-cream-book` relates to its companion repository, [`PitziLabs/cloud-platform-demo`](https://github.com/PitziLabs/cloud-platform-demo), which turns these recipes into a live website at **icecreamtofightwith.com**.
+This document describes how `ice-cream-book` relates to its companion repository, [`PitziLabs/foundry-platform-demo`](https://github.com/PitziLabs/foundry-platform-demo), which turns these recipes into a live website at **icecreamtofightwith.com**.
 
 ## This Repo's Role
 
@@ -20,13 +20,13 @@ Each recipe file follows a consistent structure — H1 title, italic subtitle, d
 
 ## What Happens to the Content
 
-The `cloud-platform-demo` repo contains a script called `sync_recipes.py` that reads these Markdown files and transforms them into web-ready content:
+The `foundry-platform-demo` repo contains a script called `sync_recipes.py` that reads these Markdown files and transforms them into web-ready content:
 
 ```
 ice-cream-book/recipes/*.md
         │
         ▼
-  sync_recipes.py (in cloud-platform-demo)
+  sync_recipes.py (in foundry-platform-demo)
         │  - Extracts title, subtitle, difficulty tier, total time
         │  - Generates YAML frontmatter for Astro
         │  - Writes to src/content/recipes/
@@ -55,7 +55,7 @@ Breaking these conventions will cause the website to display missing or incorrec
 - **Editing a recipe** — Content updates flow through on the next site build. No infra changes needed.
 - **Adding a new recipe** — Create a new numbered `.md` file in `recipes/`. The sync script auto-discovers all `*.md` files in the directory.
 - **Renaming a recipe file** — Changes the URL slug on the website. Old URLs will 404 unless redirects are added on the infra side.
-- **Changing the format** — If the H1, italic subtitle, `**Difficulty:**`, or `**Total Time:**` patterns change, `sync_recipes.py` must be updated in `cloud-platform-demo` to match.
+- **Changing the format** — If the H1, italic subtitle, `**Difficulty:**`, or `**Total Time:**` patterns change, `sync_recipes.py` must be updated in `foundry-platform-demo` to match.
 
 ## What Does NOT Affect the Website
 
@@ -70,7 +70,7 @@ To work on both repos together locally:
 ```
 ~/projects/
 ├── ice-cream-book/        # this repo
-└── cloud-platform-demo/
+└── foundry-platform-demo/
     └── app/
         └── ice_cream_site/
             └── sync_recipes.py   # expects ../ice-cream-book/recipes/
