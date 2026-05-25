@@ -1,0 +1,208 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Ice Cream to Fight With', description = 'Recipes You\'ll Fuck Up At Least Once' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style is:global>
+    :root {
+      /* Palette — warm, food-inspired */
+      --color-bg: #faf7f2;
+      --color-surface: #ffffff;
+      --color-text: #2d2a26;
+      --color-text-muted: #6b6560;
+      --color-accent: #c4533a;
+      --color-accent-light: #f0d5cf;
+      --color-border: #e8e2da;
+
+      /* Tier colors */
+      --tier-chill: #4a9e82;
+      --tier-legit: #d4a12e;
+      --tier-real-deal: #d07030;
+      --tier-ordeal: #c4533a;
+
+      /* Type scale */
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'Space Grotesk', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 18px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Navigation --- */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-nav a {
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    .site-nav .logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .site-nav .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .site-nav .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* --- Main content --- */
+    .page-container {
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .page-container.wide {
+      max-width: 64rem;
+    }
+
+    /* --- Typography for rendered markdown --- */
+    .recipe-body h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      margin-top: 2.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .recipe-body h3 {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text-muted);
+    }
+
+    .recipe-body p {
+      margin-bottom: 1rem;
+    }
+
+    .recipe-body ul, .recipe-body ol {
+      margin: 0.5rem 0 1rem 1.5rem;
+    }
+
+    .recipe-body li {
+      margin-bottom: 0.35rem;
+    }
+
+    .recipe-body strong {
+      font-weight: 600;
+    }
+
+    .recipe-body em {
+      font-style: italic;
+    }
+
+    .recipe-body hr {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 2rem 0;
+    }
+
+    /* --- Tier badges --- */
+    .tier-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      color: white;
+    }
+
+    .tier-badge.chill { background: var(--tier-chill); }
+    .tier-badge.legit { background: var(--tier-legit); }
+    .tier-badge.real-deal { background: var(--tier-real-deal); }
+    .tier-badge.ordeal { background: var(--tier-ordeal); }
+
+    /* --- Footer --- */
+    .site-footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 640px) {
+      html { font-size: 16px; }
+      .site-nav { padding: 0.65rem 1rem; }
+      .site-nav .nav-links { gap: 1rem; font-size: 0.75rem; }
+      .page-container { padding: 1.5rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="/" class="logo">Ice Cream to Fight With</a>
+    <ul class="nav-links">
+      <li><a href="/">Recipes</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+
+  <slot />
+
+  <footer class="site-footer">
+    Ice Cream to Fight With &copy; {new Date().getFullYear()}
+  </footer>
+</body>
+</html>
