@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -30,6 +31,18 @@ const next = idx < allRecipes.length - 1 ? allRecipes[idx + 1] : null;
 <Base title={`${recipe.data.title} — Ice Cream to Fight With`} description={recipe.data.subtitle}>
 
   <article class="page-container">
+    {recipe.data.illustration && (
+      <figure class="recipe-hero">
+        <Image
+          src={recipe.data.illustration}
+          alt={`Illustration for ${recipe.data.title}`}
+          widths={[480, 800, 1200, 1800]}
+          sizes="(max-width: 768px) 100vw, min(1200px, 100vw)"
+          loading="eager"
+        />
+      </figure>
+    )}
+
     <header class="recipe-header">
       <span class={`tier-badge ${tierClass}`}>{recipe.data.tier}</span>
       <span class="recipe-number">Recipe #{String(recipe.data.recipeNumber).padStart(2, '0')}</span>
@@ -71,6 +84,21 @@ const next = idx < allRecipes.length - 1 ? allRecipes[idx + 1] : null;
 </Base>
 
 <style>
+  .recipe-hero {
+    margin: 0 0 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .recipe-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .recipe-header {
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;

@@ -7,11 +7,16 @@ Recipe source is determined by:
   1. RECIPE_SOURCE environment variable (used in CI/CD)
   2. Fallback: ../ice-cream-book/recipes/ (local dev)
 
-Writes to: src/content/recipes/*.md
+Illustrations (if present) are copied from <recipe_source_parent>/illustrations/
+into src/assets/recipes/ and referenced from frontmatter via Astro's
+image() schema helper.
+
+Writes to: src/content/recipes/*.md, src/assets/recipes/*.png
 """
 
 import re
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -22,7 +27,10 @@ if RECIPE_SOURCE:
 else:
     REPO_RECIPES = Path(__file__).parent.parent / "ice-cream-book" / "recipes"
 
+ILLUSTRATIONS_SOURCE = REPO_RECIPES.parent / "illustrations"
+
 OUTPUT_DIR = Path(__file__).parent / "src" / "content" / "recipes"
+ILLUSTRATIONS_OUTPUT = Path(__file__).parent / "src" / "assets" / "recipes"
 
 TIER_MAP = {
     "CHILL": {"order": 1, "color": "#7ecfb3", "label": "CHILL"},
@@ -118,17 +126,23 @@ def generate_frontmatter(metadata):
     def esc(s):
         return s.replace('"', '\\"')
 
-    return f"""---
-title: "{esc(metadata['title'])}"
-subtitle: "{esc(metadata['subtitle'])}"
-tier: "{esc(metadata['tier'])}"
-tierOrder: {metadata['tier_order']}
-tierColor: "{metadata['tier_color']}"
-difficultyText: "{esc(metadata['difficulty_text'])}"
-totalTime: "{esc(metadata['total_time'])}"
-recipeSlug: "{metadata['recipeSlug']}"
-recipeNumber: {metadata['recipe_number']}
----"""
+    lines = [
+        "---",
+        f'title: "{esc(metadata["title"])}"',
+        f'subtitle: "{esc(metadata["subtitle"])}"',
+        f'tier: "{esc(metadata["tier"])}"',
+        f'tierOrder: {metadata["tier_order"]}',
+        f'tierColor: "{metadata["tier_color"]}"',
+        f'difficultyText: "{esc(metadata["difficulty_text"])}"',
+        f'totalTime: "{esc(metadata["total_time"])}"',
+        f'recipeSlug: "{metadata["recipeSlug"]}"',
+        f'recipeNumber: {metadata["recipe_number"]}',
+    ]
+    if metadata.get("illustration"):
+        # Path is relative to the markdown file location (src/content/recipes/)
+        lines.append(f'illustration: "{metadata["illustration"]}"')
+    lines.append("---")
+    return "\n".join(lines)
 
 
 def main():
@@ -138,20 +152,40 @@ def main():
         sys.exit(1)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    ILLUSTRATIONS_OUTPUT.mkdir(parents=True, exist_ok=True)
+
+    have_illustrations = ILLUSTRATIONS_SOURCE.exists()
+    if have_illustrations:
+        print(f"Illustrations source: {ILLUSTRATIONS_SOURCE}")
+    else:
+        print(f"No illustrations directory at {ILLUSTRATIONS_SOURCE} — proceeding without")
 
     recipe_files = sorted(REPO_RECIPES.glob("*.md"))
     print(f"Found {len(recipe_files)} recipe files in {REPO_RECIPES}")
 
+    illustrated = 0
     for filepath in recipe_files:
         metadata, body = parse_recipe(filepath)
+
+        if have_illustrations:
+            src_image = ILLUSTRATIONS_SOURCE / f"{metadata['recipeSlug']}.png"
+            if src_image.exists():
+                dst_image = ILLUSTRATIONS_OUTPUT / src_image.name
+                shutil.copy2(src_image, dst_image)
+                metadata["illustration"] = f"../../assets/recipes/{src_image.name}"
+                illustrated += 1
+
         frontmatter = generate_frontmatter(metadata)
         output = f"{frontmatter}\n\n{body}\n"
 
         out_path = OUTPUT_DIR / filepath.name
         out_path.write_text(output, encoding="utf-8")
-        print(f"  ✓ {filepath.name} → {metadata['title']} [{metadata['tier']}]")
+        mark = "🎨" if metadata.get("illustration") else "  "
+        print(f"  {mark} {filepath.name} → {metadata['title']} [{metadata['tier']}]")
 
     print(f"\nDone! {len(recipe_files)} recipes written to {OUTPUT_DIR}")
+    if have_illustrations:
+        print(f"Illustrations: {illustrated}/{len(recipe_files)} recipes have hero images")
 
 
 if __name__ == "__main__":
