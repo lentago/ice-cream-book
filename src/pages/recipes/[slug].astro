@@ -4,6 +4,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import RecipeMeta from '../../components/RecipeMeta.astro';
 import RecipeNav from '../../components/RecipeNav.astro';
 import RecipeJsonLd from '../../components/RecipeJsonLd.astro';
+import RelatedRecipes from '../../components/RelatedRecipes.astro';
 import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
@@ -87,6 +88,8 @@ if (recipe.data.illustration) {
     <div class="recipe-body">
       <Content />
     </div>
+
+    <RelatedRecipes current={recipe} all={allRecipes} />
 
     <RecipeNav
       prev={prev ? { slug: prev.data.recipeSlug, title: prev.data.title } : null}
