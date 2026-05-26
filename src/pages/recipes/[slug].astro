@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import RecipeMeta from '../../components/RecipeMeta.astro';
 import RecipeNav from '../../components/RecipeNav.astro';
-import { Image } from 'astro:assets';
+import RecipeJsonLd from '../../components/RecipeJsonLd.astro';
+import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -22,8 +23,29 @@ allRecipes.sort((a, b) => a.data.recipeNumber - b.data.recipeNumber);
 const idx = allRecipes.findIndex(r => r.data.recipeSlug === recipe.data.recipeSlug);
 const prev = idx > 0 ? allRecipes[idx - 1] : null;
 const next = idx >= 0 && idx < allRecipes.length - 1 ? allRecipes[idx + 1] : null;
+
+// Absolute URLs for JSON-LD. Astro.site is set in astro.config.mjs.
+const canonicalUrl = new URL(`/recipes/${recipe.data.recipeSlug}/`, Astro.site).toString();
+let imageUrl: string | undefined;
+if (recipe.data.illustration) {
+  const optimized = await getImage({ src: recipe.data.illustration, width: 1200 });
+  imageUrl = new URL(optimized.src, Astro.site).toString();
+}
 ---
 <Base title={`${recipe.data.title} — Ice Cream to Fight With`} description={recipe.data.subtitle}>
+  <RecipeJsonLd
+    title={recipe.data.title}
+    subtitle={recipe.data.subtitle}
+    url={canonicalUrl}
+    imageUrl={imageUrl}
+    cuisine={recipe.data.cuisine}
+    tier={recipe.data.tier}
+    activeTimeMinutes={recipe.data.activeTimeMinutes}
+    totalTimeMinutesMin={recipe.data.totalTimeMinutesMin}
+    totalTimeMinutesMax={recipe.data.totalTimeMinutesMax}
+    recipeYield={recipe.data.recipeYield}
+    dietary={recipe.data.dietary}
+  />
 
   <article class="page-container">
     {recipe.data.illustration && (

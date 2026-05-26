@@ -1,0 +1,79 @@
+---
+// Emits a schema.org Recipe JSON-LD block so search engines and recipe
+// aggregators can render a rich snippet (cooking time, yield, image
+// preview). Intentionally partial: recipeIngredient and recipeInstructions
+// are deferred until the ingredient frontmatter is restructured in #80.
+// Google Rich Results Test is tolerant of partial Recipe markup — what's
+// here still earns the rich snippet.
+interface Props {
+  title: string;
+  subtitle: string;
+  url: string;                      // canonical absolute URL of the recipe page
+  imageUrl?: string;                // absolute URL, optional
+  cuisine?: string;
+  tier: string;                     // CHILL / LEGIT / THE REAL DEAL / A FUCKING ORDEAL
+  activeTimeMinutes?: number;
+  totalTimeMinutesMin?: number;
+  totalTimeMinutesMax?: number;
+  recipeYield?: string;
+  dietary?: string[];
+}
+
+const {
+  title,
+  subtitle,
+  url,
+  imageUrl,
+  cuisine,
+  tier,
+  activeTimeMinutes,
+  totalTimeMinutesMin,
+  totalTimeMinutesMax,
+  recipeYield,
+  dietary,
+} = Astro.props;
+
+function isoDuration(minutes: number): string {
+  if (minutes < 60) return `PT${minutes}M`;
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return m === 0 ? `PT${h}H` : `PT${h}H${m}M`;
+}
+
+// Map dietary tags to schema.org RestrictedDiet enum URLs where one exists.
+// dairy-free, egg-free, contains-* tags don't have a schema.org enum;
+// they ride along in keywords instead.
+const DIET_ENUM: Record<string, string> = {
+  'vegan': 'https://schema.org/VeganDiet',
+  'gluten-free': 'https://schema.org/GlutenFreeDiet',
+};
+
+const suitableForDiet = (dietary ?? [])
+  .map(tag => DIET_ENUM[tag])
+  .filter((url): url is string => Boolean(url));
+
+const keywords = [cuisine, tier, ...(dietary ?? [])]
+  .filter((s): s is string => Boolean(s))
+  .join(', ');
+
+const recipe: Record<string, unknown> = {
+  '@context': 'https://schema.org/',
+  '@type': 'Recipe',
+  name: title,
+  description: subtitle,
+  url,
+  // All 28 are ice cream; recipeCategory is a content-classification field
+  // (e.g. "Dessert"), distinct from the difficulty tier which is custom.
+  recipeCategory: 'Dessert',
+};
+
+if (imageUrl) recipe.image = imageUrl;
+if (cuisine) recipe.recipeCuisine = cuisine;
+if (activeTimeMinutes != null) recipe.prepTime = isoDuration(activeTimeMinutes);
+if (totalTimeMinutesMin != null) recipe.totalTime = isoDuration(totalTimeMinutesMin);
+if (recipeYield) recipe.recipeYield = recipeYield;
+if (keywords) recipe.keywords = keywords;
+if (suitableForDiet.length === 1) recipe.suitableForDiet = suitableForDiet[0];
+else if (suitableForDiet.length > 1) recipe.suitableForDiet = suitableForDiet;
+---
+<script type="application/ld+json" set:html={JSON.stringify(recipe)} />
