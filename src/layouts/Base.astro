@@ -25,10 +25,25 @@ const recipeSlugs = allRecipes.map(r => r.data.recipeSlug);
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="alternate" type="application/rss+xml" title="Ice Cream to Fight With" href="/rss.xml" />
+
+  <script is:inline>
+    // FOUC prevention: apply saved theme before first paint.
+    // Allowed values: 'light' | 'dark'. Anything else means "follow system",
+    // which the CSS prefers-color-scheme media query handles.
+    (() => {
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.dataset.theme = saved;
+        }
+      } catch {}
+    })();
+  </script>
+
   <ClientRouter />
   <style is:global>
     :root {
-      /* Palette — warm, food-inspired */
+      /* Light palette — warm, food-inspired */
       --color-bg: #faf7f2;
       --color-surface: #ffffff;
       --color-text: #2d2a26;
@@ -36,8 +51,9 @@ const recipeSlugs = allRecipes.map(r => r.data.recipeSlug);
       --color-accent: #c4533a;
       --color-accent-light: #f0d5cf;
       --color-border: #e8e2da;
+      --color-nav-bg: rgba(250, 247, 242, 0.92);
 
-      /* Tier colors */
+      /* Tier brand colors — same in both modes */
       --tier-chill: #4a9e82;
       --tier-legit: #d4a12e;
       --tier-real-deal: #d07030;
@@ -47,6 +63,39 @@ const recipeSlugs = allRecipes.map(r => r.data.recipeSlug);
       --font-display: 'DM Serif Display', Georgia, serif;
       --font-body: 'Space Grotesk', system-ui, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+
+      color-scheme: light;
+    }
+
+    /* Dark palette — applies when:
+       1. User has chosen dark explicitly (data-theme="dark"), OR
+       2. User has no preference set AND system is dark.
+       :not([data-theme="light"]) keeps the media query from overriding
+       an explicit light choice. */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --color-bg: #1c1a17;
+        --color-surface: #28241f;
+        --color-text: #ece5da;
+        --color-text-muted: #a59c8e;
+        --color-accent: #d96b52;
+        --color-accent-light: #3a2a25;
+        --color-border: #3a342c;
+        --color-nav-bg: rgba(28, 26, 23, 0.92);
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --color-bg: #1c1a17;
+      --color-surface: #28241f;
+      --color-text: #ece5da;
+      --color-text-muted: #a59c8e;
+      --color-accent: #d96b52;
+      --color-accent-light: #3a2a25;
+      --color-border: #3a342c;
+      --color-nav-bg: rgba(28, 26, 23, 0.92);
+      color-scheme: dark;
     }
 
     *, *::before, *::after {
@@ -73,7 +122,7 @@ const recipeSlugs = allRecipes.map(r => r.data.recipeSlug);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(250, 247, 242, 0.92);
+      background: var(--color-nav-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--color-border);
       padding: 0.75rem 2rem;
@@ -107,8 +156,9 @@ const recipeSlugs = allRecipes.map(r => r.data.recipeSlug);
       color: var(--color-accent);
     }
 
-    .site-nav .nav-random {
-      /* Style the button so it reads as a peer of the nav links */
+    .site-nav .nav-random,
+    .site-nav .nav-theme {
+      /* Style buttons so they read as peers of the nav links */
       background: none;
       border: none;
       padding: 0;
@@ -119,7 +169,8 @@ const recipeSlugs = allRecipes.map(r => r.data.recipeSlug);
       text-transform: inherit;
     }
 
-    .site-nav .nav-random:hover {
+    .site-nav .nav-random:hover,
+    .site-nav .nav-theme:hover {
       color: var(--color-accent);
     }
 
@@ -223,16 +274,59 @@ const recipeSlugs = allRecipes.map(r => r.data.recipeSlug);
       <li><a href="/">Recipes</a></li>
       <li><a href="/about">About</a></li>
       <li><button type="button" id="random-recipe" class="nav-random">Surprise me</button></li>
+      <li>
+        <button type="button" id="theme-toggle" class="nav-theme" aria-label="Toggle color theme">
+          <span class="theme-label">Auto</span>
+        </button>
+      </li>
     </ul>
   </nav>
 
   <script define:vars={{ recipeSlugs }}>
-    // Random recipe button. transition:persist keeps the nav across
-    // SPA navigations so this listener only needs to bind once.
+    // transition:persist keeps the nav across SPA navigations,
+    // so these listeners only need to bind once.
+
     document.getElementById('random-recipe')?.addEventListener('click', () => {
       const slug = recipeSlugs[Math.floor(Math.random() * recipeSlugs.length)];
       window.location.href = `/recipes/${slug}/`;
     });
+
+    // Theme toggle: cycles Auto -> Light -> Dark -> Auto
+    (() => {
+      const order = ['auto', 'light', 'dark'];
+      const labels = { auto: 'Auto', light: 'Light', dark: 'Dark' };
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      const labelEl = btn.querySelector('.theme-label');
+
+      function readState() {
+        try {
+          const saved = localStorage.getItem('theme');
+          if (saved === 'light' || saved === 'dark') return saved;
+        } catch {}
+        return 'auto';
+      }
+
+      function applyTheme(state) {
+        if (state === 'auto') {
+          delete document.documentElement.dataset.theme;
+          try { localStorage.removeItem('theme'); } catch {}
+        } else {
+          document.documentElement.dataset.theme = state;
+          try { localStorage.setItem('theme', state); } catch {}
+        }
+        if (labelEl) labelEl.textContent = labels[state];
+      }
+
+      // Sync label with the state the inline head script already applied
+      if (labelEl) labelEl.textContent = labels[readState()];
+
+      btn.addEventListener('click', () => {
+        const current = readState();
+        const next = order[(order.indexOf(current) + 1) % order.length];
+        applyTheme(next);
+      });
+    })();
   </script>
 
   <slot />
