@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const recipes = await getCollection('recipes');
+
+// Sort by recipe number
+recipes.sort((a, b) => a.data.recipeNumber - b.data.recipeNumber);
+
+// Group by tier
+const tiers = [
+  { name: 'CHILL', class: 'chill', recipes: recipes.filter(r => r.data.tier === 'CHILL') },
+  { name: 'LEGIT', class: 'legit', recipes: recipes.filter(r => r.data.tier === 'LEGIT') },
+  { name: 'THE REAL DEAL', class: 'real-deal', recipes: recipes.filter(r => r.data.tier === 'THE REAL DEAL') },
+  { name: 'A FUCKING ORDEAL', class: 'ordeal', recipes: recipes.filter(r => r.data.tier === 'A FUCKING ORDEAL') },
+];
+---
+<Base title="Ice Cream to Fight With" description="Recipes You'll Fuck Up At Least Once">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Ice Cream<br /><span class="accent">to Fight With</span></h1>
+      <p class="tagline">Recipes You'll Fuck Up At Least Once</p>
+    </div>
+  </header>
+
+  <main class="page-container wide">
+    {tiers.map(tier => (
+      <section class="tier-section">
+        <div class="tier-header">
+          <span class={`tier-badge ${tier.class}`}>{tier.name}</span>
+          <span class="tier-count">{tier.recipes.length} recipes</span>
+        </div>
+        <div class="recipe-grid">
+          {tier.recipes.map(recipe => (
+            <a href={`/recipes/${recipe.data.recipeSlug}`} class={`recipe-card ${tier.class}`}>
+              <span class="recipe-number">#{String(recipe.data.recipeNumber).padStart(2, '0')}</span>
+              <h3>{recipe.data.title}</h3>
+              <p class="recipe-subtitle">{recipe.data.subtitle}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </main>
+
+</Base>
+
+<style>
+  .hero {
+    background: linear-gradient(145deg, #2d2a26 0%, #4a3f35 100%);
+    color: #faf7f2;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero .accent {
+    color: var(--color-accent);
+    font-style: italic;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: #b8aea4;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .tier-section {
+    margin-bottom: 3rem;
+  }
+
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tier-count {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .recipe-card {
+    display: block;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .recipe-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .recipe-card.chill::before { background: var(--tier-chill); }
+  .recipe-card.legit::before { background: var(--tier-legit); }
+  .recipe-card.real-deal::before { background: var(--tier-real-deal); }
+  .recipe-card.ordeal::before { background: var(--tier-ordeal); }
+
+  .recipe-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .recipe-number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .recipe-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    margin: 0.25rem 0 0.35rem;
+  }
+
+  .recipe-subtitle {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 2.5rem; }
+    .hero { padding: 3.5rem 1.5rem 3rem; }
+    .recipe-grid { grid-template-columns: 1fr; }
+  }
+</style>

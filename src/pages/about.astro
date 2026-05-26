@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="About — Ice Cream to Fight With" description="What this book is and why it exists">
+
+  <main class="page-container">
+    <header class="about-header">
+      <h1>About This Book</h1>
+    </header>
+
+    <div class="about-body">
+      <p>This is a collection of ice cream recipes that actually <em>mean</em> something—flavors rooted in real places, real traditions, and real ingredients that will absolutely make you work for them.</p>
+
+      <p>Each of these recipes is a high-wire act of cultural translation—taking flavors that define a cuisine or a region and figuring out how to make them work in ice cream without bastardizing what makes them special. We're doing it with respect, good ingredients, and a reasonable amount of panic.</p>
+
+      <p>Some are elegant. Some are straight-up weird. And some are flat-out endurance tests.</p>
+
+      <p>You <strong>will</strong> fuck something up. Probably multiple somethings. That's not a failure—that's the process. The title isn't a warning, it's a promise.</p>
+
+      <h2>The Difficulty Tiers</h2>
+
+      <div class="tier-explainer">
+        <div class="tier-row">
+          <span class="tier-badge chill">CHILL</span>
+          <p>You're making tea, basically. Simple techniques, minimal failure points, maximum reward. Start here if you've never made ice cream before.</p>
+        </div>
+        <div class="tier-row">
+          <span class="tier-badge legit">LEGIT</span>
+          <p>Real ice cream making. Custard bases, tempering, infusions. You'll learn technique here, and the results are worth the effort.</p>
+        </div>
+        <div class="tier-row">
+          <span class="tier-badge real-deal">THE REAL DEAL</span>
+          <p>Multiple components, timing choreography, and at least one moment where you'll question your life choices. The smug satisfaction when you nail it is unmatched.</p>
+        </div>
+        <div class="tier-row">
+          <span class="tier-badge ordeal">A FUCKING ORDEAL</span>
+          <p>Yeasted doughs, multi-day processes, rare seasonal ingredients that spoil in 48 hours. You absolute lunatic. We love you for it.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</Base>
+
+<style>
+  .about-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-header h1 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+  }
+
+  .about-body p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .about-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tier-explainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .tier-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .tier-row .tier-badge {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .tier-row p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+</style>

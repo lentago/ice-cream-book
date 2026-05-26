@@ -1,0 +1,88 @@
+# .github/workflows/deploy.yml
+#
+# Build & Deploy: Ice Cream Cookbook → ECR → ECS Fargate → icecreamtofightwith.com
+#
+# Triggers:
+#   1. Push to main (any path — KISS, deploys are cheap)
+#   2. Manual workflow_dispatch from GitHub UI
+#
+# Authenticates via OIDC. Builds the Astro static site, packages it in
+# an nginx container, pushes to ECR, and tells ECS to roll out.
+
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPO: foundry-dev-app
+  ECS_CLUSTER: foundry-dev-cluster
+  ECS_SERVICE: foundry-dev-app
+  AWS_ROLE_ARN: arn:aws:iam::365184644049:role/foundry-dev-github-actions
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Astro dependencies
+        run: npm ci
+
+      - name: Sync recipes into Astro content
+        run: python3 sync_recipes.py
+
+      - name: Build static site
+        run: npx astro build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push container image
+        env:
+          REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build \
+            -t $REGISTRY/$ECR_REPO:latest \
+            -t $REGISTRY/$ECR_REPO:$IMAGE_TAG \
+            .
+
+          docker push $REGISTRY/$ECR_REPO:latest
+          docker push $REGISTRY/$ECR_REPO:$IMAGE_TAG
+
+      - name: Force new ECS deployment
+        run: |
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
+            --force-new-deployment \
+            --region $AWS_REGION \
+            --no-cli-pager
+
+      - name: Wait for deployment to stabilize
+        run: |
+          aws ecs wait services-stable \
+            --cluster $ECS_CLUSTER \
+            --services $ECS_SERVICE \
+            --region $AWS_REGION
