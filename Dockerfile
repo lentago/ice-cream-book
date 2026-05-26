@@ -13,6 +13,6 @@ FROM nginx:latest
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy pre-built static site from Astro
-COPY ice_cream_site/dist/ /usr/share/nginx/html/
+COPY dist/ /usr/share/nginx/html/
 
 EXPOSE 8080

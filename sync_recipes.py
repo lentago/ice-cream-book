@@ -3,31 +3,24 @@
 Convert ice-cream-book recipe markdown files into Astro-compatible
 content files with YAML frontmatter.
 
-Recipe source is determined by:
-  1. RECIPE_SOURCE environment variable (used in CI/CD)
-  2. Fallback: ../ice-cream-book/recipes/ (local dev)
+Recipes and illustrations live alongside this script at the repo root,
+since the foundry-platform-demo migration (issue #55) brought the Astro
+source into this repo. No RECIPE_SOURCE indirection needed.
 
-Illustrations (if present) are copied from <recipe_source_parent>/illustrations/
-into src/assets/recipes/ and referenced from frontmatter via Astro's
-image() schema helper.
+Illustrations are copied from illustrations/ into src/assets/recipes/
+and referenced from frontmatter via Astro's image() schema helper.
 
 Writes to: src/content/recipes/*.md, src/assets/recipes/*.png
 """
 
 import re
-import os
 import shutil
 import sys
 from pathlib import Path
 
-# Accept recipe source from env var (CI) or default to relative path (local)
-RECIPE_SOURCE = os.environ.get("RECIPE_SOURCE")
-if RECIPE_SOURCE:
-    REPO_RECIPES = Path(RECIPE_SOURCE)
-else:
-    REPO_RECIPES = Path(__file__).parent.parent / "ice-cream-book" / "recipes"
-
-ILLUSTRATIONS_SOURCE = REPO_RECIPES.parent / "illustrations"
+REPO_ROOT = Path(__file__).parent
+REPO_RECIPES = REPO_ROOT / "recipes"
+ILLUSTRATIONS_SOURCE = REPO_ROOT / "illustrations"
 
 OUTPUT_DIR = Path(__file__).parent / "src" / "content" / "recipes"
 ILLUSTRATIONS_OUTPUT = Path(__file__).parent / "src" / "assets" / "recipes"
@@ -219,7 +212,6 @@ def generate_frontmatter(metadata):
 def main():
     if not REPO_RECIPES.exists():
         print(f"Error: Recipe directory not found at {REPO_RECIPES}")
-        print(f"  Set RECIPE_SOURCE env var or ensure ../ice-cream-book/recipes/ exists")
         sys.exit(1)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
