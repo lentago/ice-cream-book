@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import RecipeMeta from '../../components/RecipeMeta.astro';
+import RecipeNav from '../../components/RecipeNav.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
@@ -15,12 +16,12 @@ export async function getStaticPaths() {
 const { recipe } = Astro.props;
 const { Content } = await recipe.render();
 
-// Find prev/next recipes
+// Find prev/next recipes. Walk all 28 in recipeNumber order (01 → 28).
 const allRecipes = await getCollection('recipes');
 allRecipes.sort((a, b) => a.data.recipeNumber - b.data.recipeNumber);
-const idx = allRecipes.findIndex(r => r.data.slug === recipe.data.recipeSlug);
+const idx = allRecipes.findIndex(r => r.data.recipeSlug === recipe.data.recipeSlug);
 const prev = idx > 0 ? allRecipes[idx - 1] : null;
-const next = idx < allRecipes.length - 1 ? allRecipes[idx + 1] : null;
+const next = idx >= 0 && idx < allRecipes.length - 1 ? allRecipes[idx + 1] : null;
 ---
 <Base title={`${recipe.data.title} — Ice Cream to Fight With`} description={recipe.data.subtitle}>
 
@@ -57,20 +58,10 @@ const next = idx < allRecipes.length - 1 ? allRecipes[idx + 1] : null;
       <Content />
     </div>
 
-    <nav class="recipe-nav">
-      {prev && (
-        <a href={`/recipes/${prev.data.slug}`} class="nav-prev">
-          <span class="nav-dir">&larr; Previous</span>
-          <span class="nav-title">{prev.data.title}</span>
-        </a>
-      )}
-      {next && (
-        <a href={`/recipes/${next.data.slug}`} class="nav-next">
-          <span class="nav-dir">Next &rarr;</span>
-          <span class="nav-title">{next.data.title}</span>
-        </a>
-      )}
-    </nav>
+    <RecipeNav
+      prev={prev ? { slug: prev.data.recipeSlug, title: prev.data.title } : null}
+      next={next ? { slug: next.data.recipeSlug, title: next.data.title } : null}
+    />
   </article>
 
 </Base>
@@ -119,47 +110,7 @@ const next = idx < allRecipes.length - 1 ? allRecipes[idx + 1] : null;
     margin-bottom: 1.5rem;
   }
 
-  .recipe-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .recipe-nav a {
-    text-decoration: none;
-    color: var(--color-text);
-    padding: 0.75rem;
-    border-radius: 6px;
-    transition: background 0.15s ease;
-  }
-
-  .recipe-nav a:hover {
-    background: var(--color-surface);
-  }
-
-  .nav-prev { text-align: left; }
-  .nav-next { text-align: right; margin-left: auto; }
-
-  .nav-dir {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.15rem;
-  }
-
-  .nav-title {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-  }
-
   @media (max-width: 640px) {
     .recipe-header h1 { font-size: 1.85rem; }
-    .recipe-nav { flex-direction: column; }
-    .nav-next { text-align: left; margin-left: 0; }
   }
 </style>
