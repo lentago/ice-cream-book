@@ -33,6 +33,8 @@ const {
   dietary,
 } = Astro.props;
 
+import { redactPlain } from '../lib/redact.mjs';
+
 function isoDuration(minutes: number): string {
   if (minutes < 60) return `PT${minutes}M`;
   const h = Math.floor(minutes / 60);
@@ -52,7 +54,7 @@ const suitableForDiet = (dietary ?? [])
   .map(tag => DIET_ENUM[tag])
   .filter((url): url is string => Boolean(url));
 
-const keywords = [cuisine, tier, ...(dietary ?? [])]
+const keywords = [cuisine, redactPlain(tier), ...(dietary ?? [])]
   .filter((s): s is string => Boolean(s))
   .join(', ');
 

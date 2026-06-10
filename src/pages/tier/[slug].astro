@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
 import { getCollection } from 'astro:content';
+import { redactHtml } from '../../lib/redact.mjs';
 
 // Astro hoists getStaticPaths into a separate scope, so TIERS lives
 // inside the function. The TS interface stays at module scope.
@@ -48,7 +49,7 @@ const recipes = (await getCollection('recipes'))
 <Base title={`${tier.name} — Ice Cream to Fight With`} description={tier.description}>
   <main class="page-container wide">
     <header class="tier-page-header">
-      <span class={`tier-badge ${tier.slug}`}>{tier.name}</span>
+      <span class={`tier-badge ${tier.slug}`} set:html={redactHtml(tier.name)} />
       <span class="tier-page-count">{recipes.length} {recipes.length === 1 ? 'recipe' : 'recipes'}</span>
       <p class="tier-page-description">{tier.description}</p>
     </header>

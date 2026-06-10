@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import RecipeCard from '../components/RecipeCard.astro';
 import { getCollection } from 'astro:content';
+import { redactHtml } from '../lib/redact.mjs';
 
 const recipes = await getCollection('recipes');
 recipes.sort((a, b) => a.data.recipeNumber - b.data.recipeNumber);
@@ -49,7 +50,7 @@ const tiers = TIERS.map(name => ({
   <header class="hero">
     <div class="hero-inner">
       <h1>Ice Cream<br /><span class="accent">to Fight With</span></h1>
-      <p class="tagline">Recipes You'll Fuck Up At Least Once</p>
+      <p class="tagline" set:html={redactHtml("Recipes You'll Fuck Up At Least Once")} />
     </div>
   </header>
 
@@ -60,7 +61,7 @@ const tiers = TIERS.map(name => ({
         <summary>Tier <span class="filter-hint">multi-select</span></summary>
         <div class="chip-row">
           {TIERS.map(name => (
-            <button type="button" class="chip" data-filter="tier" data-value={name} aria-pressed="false">{name}</button>
+            <button type="button" class="chip" data-filter="tier" data-value={name} aria-pressed="false" set:html={redactHtml(name)} />
           ))}
         </div>
       </details>
@@ -115,7 +116,7 @@ const tiers = TIERS.map(name => ({
       <section class="tier-section" id={tier.class} data-tier-section={tier.name}>
         <div class="tier-header">
           <a href={`/tier/${tier.class}/`} class="tier-link">
-            <span class={`tier-badge ${tier.class}`}>{tier.name}</span>
+            <span class={`tier-badge ${tier.class}`} set:html={redactHtml(tier.name)} />
           </a>
           <span class="tier-count">{tier.recipes.length} recipes</span>
         </div>

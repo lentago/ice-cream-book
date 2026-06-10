@@ -10,6 +10,8 @@ interface Props {
   siteUrl: string;       // absolute base, e.g. https://icecreamtofightwith.com
 }
 
+import { redactHtml, redactPlain } from '../lib/redact.mjs';
+
 const { tier, recipeTitle, recipeUrl, siteUrl } = Astro.props;
 
 const TIER_SLUG: Record<string, string> = {
@@ -29,7 +31,7 @@ const jsonLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
-    { '@type': 'ListItem', position: 2, name: tier, item: tierAbsoluteUrl },
+    { '@type': 'ListItem', position: 2, name: redactPlain(tier), item: tierAbsoluteUrl },
     { '@type': 'ListItem', position: 3, name: recipeTitle, item: recipeUrl },
   ],
 };
@@ -38,7 +40,7 @@ const jsonLd = {
   <ol>
     <li><a href="/">Home</a></li>
     <li aria-hidden="true" class="sep">›</li>
-    <li><a href={tierHref}>{tier}</a></li>
+    <li><a href={tierHref} set:html={redactHtml(tier)} /></li>
     <li aria-hidden="true" class="sep">›</li>
     <li aria-current="page">{recipeTitle}</li>
   </ol>

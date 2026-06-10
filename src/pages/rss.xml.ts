@@ -1,6 +1,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { redactPlain } from '../lib/redact.mjs';
 
 export async function GET(context: APIContext) {
   const recipes = await getCollection('recipes');
@@ -11,14 +12,14 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: 'Ice Cream to Fight With',
-    description: "Recipes You'll Fuck Up At Least Once — custard-based ice cream from around the world.",
+    description: redactPlain("Recipes You'll Fuck Up At Least Once — custard-based ice cream from around the world."),
     site: context.site!,
     items: recipes.map(recipe => ({
       title: recipe.data.title,
       description: recipe.data.subtitle,
       link: `/recipes/${recipe.data.recipeSlug}/`,
       categories: [
-        recipe.data.tier,
+        redactPlain(recipe.data.tier),
         ...(recipe.data.cuisine ? [recipe.data.cuisine] : []),
         ...(recipe.data.dietary ?? []),
       ],
