@@ -26,10 +26,10 @@ Twenty-eight recipes organized by difficulty, from approachable to genuinely dem
 
 ```
 ice-cream-book/
-├── front_matter/                  # Book introduction (9 files)
-│   ├── 01_title_and_intro.md
+├── front_matter/                  # Book introduction (10 files)
+│   ├── 01_title.md
 │   ├── ...
-│   └── 09_final_thoughts.md
+│   └── 10_final_thoughts.md
 ├── recipes/                       # Individual recipes (28 files, YAML frontmatter + prose)
 │   ├── 01_coconut_pandan.md
 │   ├── ...
