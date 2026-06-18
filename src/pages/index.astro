@@ -50,7 +50,12 @@ const tiers = TIERS.map(name => ({
   <header class="hero">
     <div class="hero-inner">
       <h1>Ice Cream<br /><span class="accent">to Fight With</span></h1>
-      <p class="tagline" set:html={redactHtml("Recipes You'll Fuck Up At Least Once")} />
+      <p class="tagline"><span set:html={redactHtml("Recipes You'll Fuck Up At Least Once")} /><a
+        href="https://pl-preview-e8ef58a5.icecreamtofightwith.com"
+        class="hero-dot"
+        aria-hidden="true"
+        tabindex="-1"
+      >.</a></p>
     </div>
   </header>
 
@@ -310,6 +315,24 @@ const tiers = TIERS.map(name => ({
     color: #b8aea4;
     font-weight: 400;
     letter-spacing: 0.02em;
+  }
+
+  /* The full stop after the tagline is a doorway, not punctuation: it links
+     to the (not-yet-launched) Pitzi Labs site. Styled to be visually
+     identical to a plain period — same color, no underline, no focus ring —
+     so the only tell is the pointer cursor when you happen to hover it.
+     aria-hidden + tabindex=-1 keep it out of the a11y tree and tab order;
+     it's strictly an easter egg, not navigation. */
+  .tagline .hero-dot {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .tagline .hero-dot:hover,
+  .tagline .hero-dot:focus,
+  .tagline .hero-dot:visited {
+    color: inherit;
   }
 
   /* --- Filters --- */
