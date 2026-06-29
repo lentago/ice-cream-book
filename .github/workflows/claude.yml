@@ -1,7 +1,7 @@
 # ============================================================================
 # Claude Code — Interactive @claude Responder
 # ============================================================================
-# Thin wrapper around PitziLabs/shared-workflows/claude-responder.yml.
+# Thin wrapper around lentago/shared-workflows/claude-responder.yml.
 # Defaults to haiku since most edits are small content tweaks;
 # `model:opus` / `model:sonnet` labels promote when the change is larger.
 # ============================================================================
@@ -28,7 +28,7 @@ jobs:
       issues: write
       id-token: write
       actions: read
-    uses: PitziLabs/shared-workflows/.github/workflows/claude-responder.yml@main
+    uses: lentago/shared-workflows/.github/workflows/claude-responder.yml@main
     secrets: inherit
     with:
       default_model: haiku
