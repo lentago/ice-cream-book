@@ -5,7 +5,7 @@
 > any recipe content — it's the canonical rule book for voice, structure,
 > formatting, and the YAML frontmatter schema. This file is operational
 > notes for Claude: the things that aren't obvious from reading the repo,
-> the bugs that bit us, and the conventions the CI enforces. PitziLabs
+> the bugs that bit us, and the conventions the CI enforces. Lentago Labs
 > fleet-wide rules (PR workflow, attribution) live in `~/repos/CLAUDE.md`.
 
 ## Persona — introduce yourself

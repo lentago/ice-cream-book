@@ -1,8 +1,8 @@
 # How This Book Becomes a Website
 
-This document describes how `ice-cream-book` reaches **icecreamtofightwith.com**, and how this repo relates to its companion infrastructure repo, [`PitziLabs/foundry-platform-demo`](https://github.com/PitziLabs/foundry-platform-demo).
+This document describes how `ice-cream-book` reaches **icecreamtofightwith.com**, and how this repo relates to its companion infrastructure repo, [`lentago/foundry-platform-demo`](https://github.com/lentago/foundry-platform-demo).
 
-Before May 2026, the Astro application source and the deploy workflow lived in `foundry-platform-demo/app/`, and this repo fired a cross-repo `repository_dispatch` event when recipes changed. Issue [foundry-platform-demo#55](https://github.com/PitziLabs/foundry-platform-demo/issues/55) split that arrangement: the application now lives here alongside the content it serves; the foundry repo provides infrastructure (ECR, ECS, ALB, IAM trust) and nothing else.
+Before May 2026, the Astro application source and the deploy workflow lived in `foundry-platform-demo/app/`, and this repo fired a cross-repo `repository_dispatch` event when recipes changed. Issue [foundry-platform-demo#55](https://github.com/lentago/foundry-platform-demo/issues/55) split that arrangement: the application now lives here alongside the content it serves; the foundry repo provides infrastructure (ECR, ECS, ALB, IAM trust) and nothing else.
 
 ## This Repo's Two Build Pipelines
 
@@ -57,7 +57,7 @@ This is what `.github/workflows/deploy.yml` runs on every push to `main`.
 | IAM role `foundry-dev-github-actions` | Assumed via OIDC from this repo's `Build & Deploy` workflow; grants ECR push + ECS update permissions |
 | ALB + Route 53 + ACM certificate | HTTPS termination, DNS, TLS. Health check probes `/health:8080` |
 
-The IAM role's trust policy is scoped to `repo:PitziLabs/ice-cream-book:*` — only workflows from this repo can assume it. The foundry repo holds the Terraform that creates and maintains the role; this repo holds the workflow that uses it.
+The IAM role's trust policy is scoped to `repo:lentago/ice-cream-book:*` — only workflows from this repo can assume it. The foundry repo holds the Terraform that creates and maintains the role; this repo holds the workflow that uses it.
 
 No stored AWS credentials in GitHub Secrets. Every deploy run gets fresh short-lived credentials via the OIDC JWT exchange.
 
