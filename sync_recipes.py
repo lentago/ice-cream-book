@@ -4,7 +4,7 @@ Convert ice-cream-book recipe markdown files into Astro-compatible
 content files with YAML frontmatter.
 
 Recipes and illustrations live alongside this script at the repo root,
-since the foundry-platform-demo migration (issue #55) brought the Astro
+since the solidago migration (issue #55) brought the Astro
 source into this repo. No RECIPE_SOURCE indirection needed.
 
 Illustrations are copied from illustrations/ into src/assets/recipes/

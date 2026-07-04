@@ -1,8 +1,8 @@
 # How This Book Becomes a Website
 
-This document describes how `ice-cream-book` reaches **icecreamtofightwith.com**, and how this repo relates to its companion infrastructure repo, [`lentago/foundry-platform-demo`](https://github.com/lentago/foundry-platform-demo).
+This document describes how `ice-cream-book` reaches **icecreamtofightwith.com**, and how this repo relates to its companion infrastructure repo, [`lentago/solidago`](https://github.com/lentago/solidago) (formerly foundry-platform-demo).
 
-Before May 2026, the Astro application source and the deploy workflow lived in `foundry-platform-demo/app/`, and this repo fired a cross-repo `repository_dispatch` event when recipes changed. Issue [foundry-platform-demo#55](https://github.com/lentago/foundry-platform-demo/issues/55) split that arrangement: the application now lives here alongside the content it serves; the foundry repo provides infrastructure (ECR, ECS, ALB, IAM trust) and nothing else.
+Before May 2026, the Astro application source and the deploy workflow lived in `foundry-platform-demo/app/`, and this repo fired a cross-repo `repository_dispatch` event when recipes changed. Issue [solidago#55](https://github.com/lentago/solidago/issues/55) split that arrangement: the application now lives here alongside the content it serves; the solidago repo provides infrastructure (ECR, ECS, ALB, IAM trust) and nothing else.
 
 ## This Repo's Two Build Pipelines
 
