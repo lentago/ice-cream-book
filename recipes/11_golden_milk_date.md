@@ -1,5 +1,4 @@
 ---
-date: "2024-08-10"
 cuisine: "South Asian"
 active_time_minutes: 30
 total_time_minutes_min: 360

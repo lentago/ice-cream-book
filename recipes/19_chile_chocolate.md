@@ -1,5 +1,4 @@
 ---
-date: "2025-02-26"
 cuisine: "Mexican"
 active_time_minutes: 60
 total_time_minutes_min: 360

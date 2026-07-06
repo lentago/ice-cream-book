@@ -1,5 +1,4 @@
 ---
-date: "2025-06-08"
 cuisine: "Australian"
 active_time_minutes: 45
 total_time_minutes_min: 360

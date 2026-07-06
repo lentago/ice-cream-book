@@ -1,5 +1,4 @@
 ---
-date: "2024-06-24"
 cuisine: "Chinese (Sichuan)"
 active_time_minutes: 45
 total_time_minutes_min: 360

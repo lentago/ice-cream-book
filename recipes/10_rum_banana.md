@@ -1,5 +1,4 @@
 ---
-date: "2025-04-19"
 cuisine: "Caribbean (Jamaican)"
 active_time_minutes: 60
 total_time_minutes_min: 360
