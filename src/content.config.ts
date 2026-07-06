@@ -5,7 +5,6 @@ const recipes = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     subtitle: z.string(),
-    date: z.coerce.date(),
     tier: z.string(),
     tierOrder: z.number(),
     tierColor: z.string(),

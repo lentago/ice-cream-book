@@ -1,5 +1,4 @@
 ---
-date: "2026-03-05"
 cuisine: "Colombian"
 active_time_minutes: 45
 total_time_minutes_min: 360

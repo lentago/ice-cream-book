@@ -1,5 +1,4 @@
 ---
-date: "2025-02-05"
 cuisine: "Korean"
 active_time_minutes: 45
 total_time_minutes_min: 360

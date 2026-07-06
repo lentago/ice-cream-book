@@ -38,10 +38,10 @@ const jsonLd = {
 ---
 <nav class="breadcrumbs" aria-label="Breadcrumb">
   <ol>
-    <li><a href="/">The Stack</a></li>
-    <li aria-hidden="true" class="sep">/</li>
+    <li><a href="/">Home</a></li>
+    <li aria-hidden="true" class="sep">›</li>
     <li><a href={tierHref} set:html={redactHtml(tier)} /></li>
-    <li aria-hidden="true" class="sep">/</li>
+    <li aria-hidden="true" class="sep">›</li>
     <li aria-current="page">{recipeTitle}</li>
   </ol>
 </nav>
@@ -51,12 +51,8 @@ const jsonLd = {
 <style>
   .breadcrumbs {
     margin: 0 0 1.5rem;
-    font-family: var(--font-stencil);
-    font-weight: 700;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ink-soft);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
   }
 
   .breadcrumbs ol {
@@ -65,27 +61,30 @@ const jsonLd = {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.45rem;
+    gap: 0.4rem;
     align-items: baseline;
   }
 
   .breadcrumbs a {
-    color: var(--ink-soft);
+    color: var(--color-text-muted);
     text-decoration: none;
     transition: color 0.15s ease;
   }
 
   .breadcrumbs a:hover {
-    color: var(--pink);
+    color: var(--color-accent);
+    text-decoration: underline;
   }
 
   .breadcrumbs .sep {
-    color: var(--pink);
+    color: var(--color-border);
     user-select: none;
   }
 
   .breadcrumbs [aria-current="page"] {
-    color: var(--ink);
+    color: var(--color-text);
+    font-weight: 500;
+    /* Long recipe names should wrap rather than overflow on mobile */
     overflow-wrap: anywhere;
   }
 </style>

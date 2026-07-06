@@ -1,5 +1,4 @@
 ---
-date: "2026-06-24"
 cuisine: "Middle Eastern"
 active_time_minutes: 90
 total_time_minutes_min: 480

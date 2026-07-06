@@ -1,5 +1,4 @@
 ---
-date: "2024-06-21"
 cuisine: "Vietnamese"
 active_time_minutes: 15
 total_time_minutes_min: 240

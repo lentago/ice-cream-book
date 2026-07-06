@@ -1,5 +1,4 @@
 ---
-date: "2025-06-12"
 cuisine: "Ethiopian"
 active_time_minutes: 75
 total_time_minutes_min: 420

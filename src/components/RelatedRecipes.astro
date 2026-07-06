@@ -46,11 +46,17 @@ fallbackPool.sort((a, b) =>
   shuffleKey(current.data.recipeSlug, b.data.recipeNumber)
 );
 const filled = [...real, ...fallbackPool.slice(0, Math.max(0, count - real.length))];
+
+const tierClassMap: Record<string, string> = {
+  'CHILL': 'chill',
+  'LEGIT': 'legit',
+  'THE REAL DEAL': 'real-deal',
+  'A FUCKING ORDEAL': 'ordeal',
+};
 ---
 {filled.length > 0 && (
   <section class="related-recipes" aria-labelledby="related-heading">
-    <hr class="cut-line" />
-    <h2 id="related-heading" class="related-head">More to Fight With</h2>
+    <h2 id="related-heading">If you liked this, try:</h2>
     <div class="related-grid">
       {filled.map(recipe => (
         <RecipeCard
@@ -58,8 +64,7 @@ const filled = [...real, ...fallbackPool.slice(0, Math.max(0, count - real.lengt
           title={recipe.data.title}
           subtitle={recipe.data.subtitle}
           number={recipe.data.recipeNumber}
-          tier={recipe.data.tier}
-          date={recipe.data.date}
+          tierClass={tierClassMap[recipe.data.tier] ?? 'legit'}
         />
       ))}
     </div>
@@ -67,24 +72,23 @@ const filled = [...real, ...fallbackPool.slice(0, Math.max(0, count - real.lengt
 )}
 
 <style>
-  .related-recipes { margin-top: 3rem; }
+  .related-recipes {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
 
-  .related-head {
+  .related-recipes h2 {
     font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    text-align: center;
-    margin: 0 0 1.75rem;
-    color: var(--ink);
-    transform: rotate(-1deg);
+    font-size: 1.4rem;
+    margin: 0 0 1rem;
+    color: var(--color-text);
   }
 
   .related-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    gap: 1.75rem;
+    gap: 1rem;
   }
 
   @media (max-width: 640px) {
