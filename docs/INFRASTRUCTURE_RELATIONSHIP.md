@@ -52,9 +52,9 @@ This is what `.github/workflows/deploy.yml` runs on every push to `main`.
 
 | Resource | What this repo uses it for |
 |---|---|
-| ECR repository `foundry-dev-app` | Tag target for `docker push` |
-| ECS cluster `foundry-dev-cluster` + service `foundry-dev-app` | Where the container actually runs |
-| IAM role `foundry-dev-github-actions` | Assumed via OIDC from this repo's `Build & Deploy` workflow; grants ECR push + ECS update permissions |
+| ECR repository `solidago-dev-app` | Tag target for `docker push` |
+| ECS cluster `solidago-dev-cluster` + service `solidago-dev-app` | Where the container actually runs |
+| IAM role `solidago-dev-github-actions` | Assumed via OIDC from this repo's `Build & Deploy` workflow; grants ECR push + ECS update permissions |
 | ALB + Route 53 + ACM certificate | HTTPS termination, DNS, TLS. Health check probes `/health:8080` |
 
 The IAM role's trust policy is scoped to `repo:lentago/site-icecreamtofightwith-com:*` (plus the pre-rename name during the 2026-07-04 transition) — only workflows from this repo can assume it. The solidago repo holds the Terraform that creates and maintains the role; this repo holds the workflow that uses it.

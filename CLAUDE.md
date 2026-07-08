@@ -55,7 +55,7 @@ the book renderer drops it.
 
 **Deploy chain.** Pushes to main fire `.github/workflows/deploy.yml`,
 which builds the Docker image, pushes to ECR, and updates the ECS
-service. OIDC auth lands in the `foundry-dev-github-actions` role from
+service. OIDC auth lands in the `solidago-dev-github-actions` role from
 the `solidago` repo. See `docs/INFRASTRUCTURE_RELATIONSHIP.md`
 for the cross-repo picture.
 

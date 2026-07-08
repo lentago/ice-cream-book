@@ -31,10 +31,10 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPO: foundry-dev-app
-  ECS_CLUSTER: foundry-dev-cluster
-  ECS_SERVICE: foundry-dev-app
-  AWS_ROLE_ARN: arn:aws:iam::365184644049:role/foundry-dev-github-actions
+  ECR_REPO: solidago-dev-app
+  ECS_CLUSTER: solidago-dev-cluster
+  ECS_SERVICE: solidago-dev-app
+  AWS_ROLE_ARN: arn:aws:iam::365184644049:role/solidago-dev-github-actions
 
 jobs:
   deploy:
