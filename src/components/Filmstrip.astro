@@ -1,8 +1,9 @@
 ---
 // The filmstrip — the site's primary navigation, per the editorial design.
-// Book order: essays 03-09 lead ("The Front Shit"), then all 28 recipes,
-// then Final Thoughts (10) closes. The active card gets an ink ring and
-// is scrolled into view on load.
+// Book order: all essays 03-10 lead ("The Front Shit"), then all 28 recipes.
+// Final Thoughts (10) sorts last among the essays, landing right before the
+// recipe divider. The active card gets an ink ring and is scrolled into view
+// on load.
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { getEssays } from '../lib/essays';
@@ -19,8 +20,6 @@ const recipes = (await getCollection('recipes')).sort(
   (a, b) => a.data.recipeNumber - b.data.recipeNumber
 );
 const essays = await getEssays();
-const essaysLead = essays.filter((e) => e.slug !== 'final-thoughts');
-const essaysEnd = essays.filter((e) => e.slug === 'final-thoughts');
 
 const isActiveEssay = (slug: string) =>
   active?.kind === 'essay' && active.slug === slug;
@@ -30,10 +29,9 @@ const isActiveRecipe = (slug: string) =>
 <div class="filmstrip">
   <nav class="film-scroll" aria-label="Book navigation">
 
-    {essaysLead.map((e) => (
+    {essays.map((e) => (
       <a href={e.href} class="film-card" data-active={isActiveEssay(e.slug)}>
         <div class="film-tile essay-tile">
-          <span class="essay-num">Essay {e.num}</span>
           <span class="essay-name">{e.shortTitle}</span>
         </div>
       </a>
@@ -68,17 +66,6 @@ const isActiveRecipe = (slug: string) =>
         </a>
       );
     })}
-
-    <div class="film-divider" role="presentation"></div>
-
-    {essaysEnd.map((e) => (
-      <a href={e.href} class="film-card" data-active={isActiveEssay(e.slug)}>
-        <div class="film-tile essay-tile">
-          <span class="essay-num">Essay {e.num}</span>
-          <span class="essay-name">{e.shortTitle}</span>
-        </div>
-      </a>
-    ))}
 
   </nav>
 </div>
@@ -170,14 +157,6 @@ const isActiveRecipe = (slug: string) =>
     flex-direction: column;
     justify-content: space-between;
     padding: 9px;
-  }
-  .essay-num {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--red);
   }
   .essay-name {
     font-family: var(--font-display);
