@@ -2,8 +2,9 @@
 //
 // Essays are the book's front-matter chapters 03-10. 01 (title page) and
 // 02 (table of contents) are print artifacts and never rendered on the
-// site. The Intro (03) is the homepage; the rest live at /read/<slug>;
-// Final Thoughts (10) sorts after the recipes in the filmstrip.
+// site. The Intro (03) is the homepage; the rest live at /read/<slug>.
+// All essays render before the recipes in the filmstrip; Final Thoughts
+// (10) sorts last among them, landing immediately before the recipe divider.
 
 import { getCollection, type CollectionEntry } from 'astro:content';
 

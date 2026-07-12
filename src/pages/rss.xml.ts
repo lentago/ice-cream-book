@@ -11,7 +11,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: 'Ice Cream to Fight With',
-    description: "Recipes You'll Fuck Up At Least Once — custard-based ice cream from around the world.",
+    description: "Recipes You'll Screw Up At Least Once — custard-based ice cream from around the world.",
     site: context.site!,
     items: recipes.map(recipe => ({
       title: recipe.data.title,
